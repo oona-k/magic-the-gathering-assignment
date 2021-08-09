@@ -1,11 +1,11 @@
 import "./App.css";
-import TableOfContents from "./components/TableOfContents";
+import Game from "./components/Game";
 
 function App() {
   return (
     <div className="App">
       <h1>Magic the Gathering</h1>
-      <TableOfContents/>
+      <Game/>
     </div>
   );
 }

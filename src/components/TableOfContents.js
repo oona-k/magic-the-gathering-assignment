@@ -1,21 +1,38 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from "react";
 
-const TableOfContents = () => {
-    const [rules, setRules] = useState('')
+const TableOfContents = ({ startIndex, endIndex, wholeText }) => {
+  const [contents, setContents] = useState("");
+  const [splitted, setSplitted] = useState([]);
 
-    const fileUrl = 'https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt' // provide file location
-
-fetch(fileUrl)
-   .then( r => r.text() )
-   //.then( t => console.log(t) )
-   .then( t  => setRules(t))
-
-    return (
-        <div>
-            <h1>Table of Contents</h1>
-            <p>{rules}</p>
-        </div>
+  useEffect(() => {
+    setContents(
+      wholeText.slice(startIndex, endIndex)
+      //wholeText.slice(startIndex, endIndex).replaceAll("\r\n", "")
     );
-}
+
+    //setContents(contents.replace("\n", "<br/>"));
+  }, [wholeText, startIndex, endIndex]);
+
+  useEffect(() => {
+    // const regex = /Step/g;
+    const regex = /\r\n/g;
+    const numberOfLineBreaks = contents.search(regex);
+    setSplitted(contents.split(regex));
+    console.log(splitted);
+    console.log(numberOfLineBreaks);
+    //setHeadings([]);
+  }, [contents, splitted]);
+
+  const headingsList = splitted.map((item) => <p>{item}</p>);
+
+  return (
+    <div>
+      <h1>Table of Contents</h1>
+      {/* <p>{startIndex}</p> */}
+      {/* <p>{endIndex}</p> */}
+      <div>{headingsList}</div>
+    </div>
+  );
+};
 
 export default TableOfContents;
