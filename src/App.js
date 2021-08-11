@@ -1,11 +1,11 @@
 import "./App.css";
-import Game from "./components/Game";
+import Container from "./components/Container";
 
 function App() {
   return (
     <div className="App">
       <h1>Magic the Gathering</h1>
-      <Game/>
+      <Container />
     </div>
   );
 }
