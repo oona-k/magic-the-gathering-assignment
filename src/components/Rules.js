@@ -12,17 +12,15 @@ const Rules = ({ selectedRule, searchResults }) => {
       selectedRule[1].includes(" ")
     ) {
       setSplittedRule(selectedRule[1].split(regex));
-    } /* else if (!selectedRule[1] || !selectedRule[1].includes(" ")) {
-      setSplittedRule("");
-    } */
+    }
   }, [selectedRule]);
 
   const rulesList = splittedRule
-    ? splittedRule.map((item) => <p>{item}</p>)
+    ? splittedRule.map((item, i) => <p key={i}>{item}</p>)
     : "";
 
   const searchResultList = searchResults
-    ? searchResults.map((item) => <p>{item}</p>)
+    ? searchResults.map((item, i) => <p key={i}>{item}</p>)
     : "";
 
   return (

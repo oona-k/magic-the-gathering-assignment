@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 const SearchBox = ({ rules, onSearchClick }) => {
   const [keyword, setKeyword] = useState("");
-  //const [splittedRules, setSplittedRules] = useState([]);
 
   const searchClicked = () => {
-    console.log(keyword);
     const chaptersWithKeyword = [];
     let splittedChapters = [];
     const searchResults = [];
@@ -14,8 +12,6 @@ const SearchBox = ({ rules, onSearchClick }) => {
 
     for (var j = 0; j < rules.length; j++) {
       if (rules[j].toLowerCase().match(keyword)) {
-        //console.log(rules[j]);
-        //return j;
         chaptersWithKeyword.push(rules[j]);
       }
     }
@@ -25,11 +21,8 @@ const SearchBox = ({ rules, onSearchClick }) => {
 
     for (var h = 0; h < splittedChapters.length; h++) {
       splittedChapters[h] = splittedChapters[h].filter((item) => item !== "");
-      console.log(splittedChapters[h]);
 
       for (var g = 0; g < splittedChapters[h].length; g++) {
-        console.log(splittedChapters[g]);
-
         if (splittedChapters[g]) {
           const matchesFound = splittedChapters[g].filter((found) =>
             found.match(keyword)
@@ -45,15 +38,11 @@ const SearchBox = ({ rules, onSearchClick }) => {
         }
       }
     }
-
-    // console.log(chaptersWithKeyword);
     onSearchClick(searchResults);
-    // return chaptersWithKeyword;
   };
 
   return (
     <div>
-      <h3>SearchBox</h3>
       <input
         key="searchRules"
         value={keyword}
