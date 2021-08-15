@@ -1,28 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Raleway&display=swap");
+
 .App {
   text-align: center;
+  font-family: "Raleway", sans-serif;
 }
 
 .game {
   display: flex;
   flex-direction: row;
+  /*   background: url(https://unsplash.com/photos/rCbdp8VCYhQ) no-repeat center
+    center;
+  /* Photo by Andy Holmes/Unsplash */
+  /*   height: 100vh;
+  width: 100vw;  */
 }
+
+h1 {
+  font-family: "Fredericka the Great", cursive;
+}
+
 .tableOfContents {
   flex: 1;
   background-color: bisque;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 
 .rules {
   flex: 2;
   background-color: burlywood;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 
 .rulesText {
   padding-left: 10%;
   padding-right: 10%;
+  text-align: left;
 }
 
 .chapter {
   cursor: pointer;
   text-align: left;
   padding-left: 40%;
+}
+
+.chapterHeading {
+  font-weight: bold;
+  padding-top: 10px;
+  cursor: default;
 }

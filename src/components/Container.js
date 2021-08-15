@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TableOfContents from "./TableOfContents";
 import Rules from "./Rules";
+import SearchBox from "./SearchBox";
 
 const Container = () => {
   const [wholeText, setWholeText] = useState("");
@@ -12,6 +13,10 @@ const Container = () => {
   const [splittedRulesText, setSplittedRulesText] = useState([]);
   const [contents, setContents] = useState("");
   const [splitted, setSplitted] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+
+  const [indexOfFirst, setIndexOfFirst] = useState(0);
+  const [indexOfSecond, setIndexOfSecond] = useState(1);
 
   const startRegex = /Contents/;
   const endRegex = /Glossary/;
@@ -35,15 +40,22 @@ const Container = () => {
     if (wholeText !== "") {
       setStartIndex(wholeText.search(startRegex));
       setEndIndex(wholeText.search(endRegex));
+      //console.log(wholeText.indexOf("Glossary"));
     }
   }, [wholeText]);
+
+  useEffect(() => {
+    if (endIndex > 0) {
+      console.log(wholeText.indexOf("Glossary", endIndex + 1));
+      setIndexOfSecond(wholeText.indexOf("Glossary", endIndex + 1));
+    }
+  }, [endIndex]);
 
   useEffect(() => {
     setContents(
       wholeText.slice(startIndex, endIndex)
       //wholeText.slice(startIndex, endIndex).replaceAll("\r\n", "")
     );
-
     //setContents(contents.replace("\n", "<br/>"));
   }, [wholeText, startIndex, endIndex]);
 
@@ -54,6 +66,7 @@ const Container = () => {
   }, [contents]);
 
   const chapterClicked = (itemNumber) => {
+    setSearchResults([]);
     setChapterNumber(itemNumber);
     const startMemberIndex = splittedRulesText.findIndex(
       (i) => i === "\r\n" + itemNumber
@@ -66,7 +79,7 @@ const Container = () => {
 
   const headingsList = splitted.map((item, i) => (
     <p
-    className="chapter"
+      className={item[1] === "." ? "chapter chapterHeading" : "chapter"}
       onClick={() => chapterClicked(item.substring(0, 3))}
 
       /* onClick={chapterClicked(item.substring(0, 3))} */
@@ -76,8 +89,11 @@ const Container = () => {
   ));
 
   useEffect(() => {
-    setRulesText(wholeText.slice(endIndex));
-  }, [wholeText, endIndex]);
+    if (wholeText && endIndex > 0 && indexOfSecond > endIndex) {
+      setRulesText(wholeText.slice(endIndex, indexOfSecond));
+      console.log(rulesText);
+    }
+  }, [wholeText, endIndex, indexOfSecond]);
 
   useEffect(() => {
     const regex = /(\r\n[0-9]{3})\.\s/g;
@@ -89,10 +105,19 @@ const Container = () => {
     <div id={item.substring(0, 3)}>{item}</div>
   )); */
 
+  const onSearchClick = (chaptersWithKeyword) => {
+    console.log(chaptersWithKeyword);
+    setSearchResults(chaptersWithKeyword);
+  };
+
   return (
-    <div className="game">
-      <TableOfContents headingsList={headingsList} />
-      <Rules selectedRule={selectedRule} />
+    <div className="container">
+      <h1>Magic the Gathering</h1>
+      <SearchBox rules={splittedRulesText} onSearchClick={onSearchClick} />
+      <div className="game">
+        <TableOfContents headingsList={headingsList} />
+        <Rules selectedRule={selectedRule} searchResults={searchResults} />
+      </div>
     </div>
   );
 };

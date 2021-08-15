@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from "react";
 
-const Rules = ({ selectedRule }) => {
+const Rules = ({ selectedRule, searchResults }) => {
   const [splittedRule, setSplittedRule] = useState("");
 
   useEffect(() => {
     const regex = /\r\n/g;
-    if (selectedRule !== "") {
+    if (
+      selectedRule &&
+      selectedRule !== "" &&
+      selectedRule[1] &&
+      selectedRule[1].includes(" ")
+    ) {
       setSplittedRule(selectedRule[1].split(regex));
-    }
+    } /* else if (!selectedRule[1] || !selectedRule[1].includes(" ")) {
+      setSplittedRule("");
+    } */
   }, [selectedRule]);
 
   const rulesList = splittedRule
     ? splittedRule.map((item) => <p>{item}</p>)
     : "";
 
+  const searchResultList = searchResults
+    ? searchResults.map((item) => <p>{item}</p>)
+    : "";
+
   return (
     <div className="rules">
-      <h1>Rules Component</h1>
-      <div className="rulesText">{rulesList}</div>
+      <h1>Rules</h1>
+      <div className="rulesText">
+        {searchResults && searchResults.length > 0
+          ? searchResultList
+          : rulesList}
+      </div>
     </div>
   );
 };
