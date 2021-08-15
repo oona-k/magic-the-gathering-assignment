@@ -42,7 +42,7 @@ const SearchBox = ({ rules, onSearchClick }) => {
   };
 
   return (
-    <div>
+    <div className="searchBox">
       <input
         key="searchRules"
         value={keyword}

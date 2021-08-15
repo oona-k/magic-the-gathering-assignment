@@ -8,11 +8,6 @@
 .game {
   display: flex;
   flex-direction: row;
-  /*   background: url(https://unsplash.com/photos/rCbdp8VCYhQ) no-repeat center
-    center;
-  /* Photo by Andy Holmes/Unsplash */
-  /*   height: 100vh;
-  width: 100vw;  */
 }
 
 h1 {
@@ -21,14 +16,14 @@ h1 {
 
 .tableOfContents {
   flex: 1;
-  background-color: bisque;
+  background-color: tan;
   max-height: 100vh;
   overflow-y: scroll;
 }
 
 .rules {
   flex: 2;
-  background-color: burlywood;
+  background-color: wheat;
   max-height: 100vh;
   overflow-y: scroll;
 }
@@ -49,4 +44,20 @@ h1 {
   font-weight: bold;
   padding-top: 10px;
   cursor: default;
+}
+
+input {
+  padding: 5px;
+}
+
+.searchBox {
+  padding-bottom: 20px;
+}
+
+button {
+  padding: 8px;
+  background-color: burlywood;
+  border: none;
+  border-radius: 2px;
+  font-weight: bold;
 }

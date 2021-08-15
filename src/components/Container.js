@@ -7,7 +7,6 @@ const Container = () => {
   const [wholeText, setWholeText] = useState("");
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(0);
-  const [chapterNumber, setChapterNumber] = useState();
   const [selectedRule, setSelectedRule] = useState("");
   const [rulesText, setRulesText] = useState("");
   const [splittedRulesText, setSplittedRulesText] = useState([]);
@@ -21,7 +20,7 @@ const Container = () => {
   const endRegex = /Glossary/;
 
   const fileUrl =
-    "https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt"; // file location
+    "https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt";
 
   useEffect(() => {
     if (wholeText === "") {
@@ -55,7 +54,6 @@ const Container = () => {
 
   const chapterClicked = (itemNumber) => {
     setSearchResults([]);
-    setChapterNumber(itemNumber);
     const startMemberIndex = splittedRulesText.findIndex(
       (i) => i === "\r\n" + itemNumber
     );
