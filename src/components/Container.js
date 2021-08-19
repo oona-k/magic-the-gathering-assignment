@@ -16,9 +16,6 @@ const Container = () => {
 
   const [indexOfSecond, setIndexOfSecond] = useState(1);
 
-  const startRegex = /Contents/;
-  const endRegex = /Glossary/;
-
   const fileUrl =
     "https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt";
 
@@ -32,8 +29,8 @@ const Container = () => {
 
   useEffect(() => {
     if (wholeText !== "") {
-      setStartIndex(wholeText.search(startRegex));
-      setEndIndex(wholeText.search(endRegex));
+      setStartIndex(wholeText.search(/Contents/));
+      setEndIndex(wholeText.search(/Glossary/));
     }
   }, [wholeText]);
 
@@ -41,7 +38,7 @@ const Container = () => {
     if (endIndex > 0) {
       setIndexOfSecond(wholeText.indexOf("Glossary", endIndex + 1));
     }
-  }, [endIndex]);
+  }, [endIndex, wholeText]);
 
   useEffect(() => {
     setContents(wholeText.slice(startIndex, endIndex));
