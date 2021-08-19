@@ -17,7 +17,7 @@ const Container = () => {
   const [indexOfSecond, setIndexOfSecond] = useState(1);
 
   const fileUrl =
-    "https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt";
+    "https://cors-anywhere.herokuapp.com/https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt";
 
   useEffect(() => {
     if (wholeText === "") {
